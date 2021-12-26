@@ -1,0 +1,13 @@
+<form [formGroup]="searchControlsForm" (ngSubmit)="onSearch()" class="searchControlsContainer">
+  <div>
+    <label for="organization">Organization</label
+    ><input type="text" id="organization" formControlName="organization" />
+  </div>
+
+  <div>
+    <label for="repository">Repository</label
+    ><input type="text" id="repository" formControlName="repository" />
+  </div>
+
+  <button type="submit" class="button" [disabled]="!searchControlsForm.valid">Search</button>
+</form>

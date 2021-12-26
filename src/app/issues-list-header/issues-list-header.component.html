@@ -1,0 +1,9 @@
+<h2 class="subheading-2" *ngIf="organization && repository">{{ organization }}/{{ repository }}</h2>
+<mat-form-field appearance="fill">
+  <mat-label>Select an option</mat-label>
+  <mat-select [value]="selected" (selectionChange)="onSelect($event)">
+    <mat-option *ngFor="let sortOption of sortOptions" [value]="sortOption.value">
+      {{ sortOption.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
