@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { FiltersService } from '../filters.service';
+import { IssuesService } from '../issues.service';
 
 @Component({
   selector: 'app-search-controls',
@@ -13,6 +14,7 @@ export class SearchControlsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private filtersService: FiltersService,
+    private issuesService: IssuesService,
   ) { }
 
   ngOnInit(): void {

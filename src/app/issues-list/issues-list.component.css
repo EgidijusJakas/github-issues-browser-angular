@@ -1,0 +1,14 @@
+.root {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  text-align: left;
+  margin-bottom: 12px;
+}

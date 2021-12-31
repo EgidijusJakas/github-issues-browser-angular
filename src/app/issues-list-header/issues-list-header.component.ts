@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FiltersService } from '../filters.service';
+import { FiltersService, SortBy } from '../filters.service';
+import { IssuesService } from '../issues.service';
 
 @Component({
   selector: 'app-issues-list-header',
@@ -11,16 +12,21 @@ export class IssuesListHeaderComponent implements OnInit {
 
   organization = '';
   repository = '';
-  sortOptions = [{ value: 'sort1', viewValue: 'Sort 1' }, { value: 'sort2', viewValue: 'Sort 2' }]
+  sortOptions = [
+    { value: SortBy.newest, viewValue: 'Newest' },
+    { value: SortBy.oldest, viewValue: 'Oldest' },
+    { value: SortBy.mostCommented, viewValue: 'Most commennted' },
+    { value: SortBy.leastCommented, viewValue: 'Least commented' },
+  ];
 
   constructor(
     private filtersService: FiltersService,
+    private issuesService: IssuesService,
   ) { 
     this.filtersService.getFilterChange().subscribe((value) => {
       this.organization = value.organization;
       this.repository = value.repository;
     });
-    console.log('ni')
   }
 
   selected = this.filtersService.getFilterSortBy();
@@ -28,7 +34,6 @@ export class IssuesListHeaderComponent implements OnInit {
   onSelect(e: any): void {
     this.filtersService.setFilterSortBy(e.value);
   }
-
 
   ngOnInit(): void {
   }

@@ -5,6 +5,14 @@ export interface Filter {
   organization: string;
   repository: string;
   sortBy: string;
+  pageNumber: number;
+}
+
+export enum SortBy {
+  newest = 'created-desc',
+  oldest = 'created-asc',
+  mostCommented = 'comments-desc',
+  leastCommented = 'comments-asc',
 }
 
 @Injectable({
@@ -16,17 +24,18 @@ export class FiltersService {
   filter: Filter = {
     organization: '',
     repository: '',
-    sortBy: 'sort1',
+    sortBy: SortBy.newest,
+    pageNumber: 0,
   }
 
   constructor() {
     this.filterChange.subscribe((value: Filter) => {
-      this.filter = { ...this.filter, ...value };
+      this.filter = value;
     })
   }
   
   setFilter(value: Filter) {
-    this.filterChange.next(value);
+    this.filterChange.next({ ...this.filter, ...value });
   }
 
   getFilterChange(): Subject<Filter> {
@@ -34,12 +43,14 @@ export class FiltersService {
   }
 
   setFilterSortBy(sortBy: string): void {
-    this.filter.sortBy = sortBy;
-    console.log(this.filter)
+    this.setFilter({ ...this.filter, sortBy });
+  }
+
+  setFilterPageNumber(pageNumber: number): void {
+    this.setFilter({ ...this.filter, pageNumber });
   }
 
   getFilterSortBy(): string {
-    console.log(this.filter)
     return this.filter.sortBy;
   }
 }
